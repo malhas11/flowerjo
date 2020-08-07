@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:layout_margin="20dp">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark"
+
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/catTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+            android:textColor="@color/colorPrimary"
+            android:text="Title"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+            android:scaleType="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_people_black_18dp" />
+
+        <TextView
+            android:id="@+id/catDescription"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="33dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:textColor="@color/colorPrimary"
+
+            android:layout_marginBottom="2dp"
+            android:text="Price JOD"
+            tools:layout_editor_absoluteX="-3dp"
+            tools:layout_editor_absoluteY="43dp" />
+
+        <Button
+            android:id="@+id/order"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="186dp"
+            android:layout_marginLeft="250dp"
+            android:layout_toEndOf="@+id/catDescription"
+            android:background="@color/darkestGray"
+            android:gravity="center"
+            android:text="Add to Basket"
+            android:textColor="@color/gray"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

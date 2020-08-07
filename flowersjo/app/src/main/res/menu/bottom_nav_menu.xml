@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home2"
+        android:title="@string/title_home" />
+
+
+    <item android:id="@+id/navigation_flowers"
+        android:icon="@drawable/flower3"
+        android:title="@string/title_flowerTypes"/>
+
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/cart3"
+        android:title="@string/cart" />
+
+
+    <item
+        android:id="@+id/navigation_menu"
+        android:icon="@drawable/menu3"
+        android:title="@string/title_menu" />
+
+</menu>

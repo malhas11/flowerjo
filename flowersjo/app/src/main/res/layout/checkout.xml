@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/relativeLayout2"
+
+      app:layout_constraintTop_toTopOf="parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:text="Given name:"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/first_name"
+            android:layout_marginTop="20dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/comfortaa_light" />
+
+      </LinearLayout>
+
+
+      <TextView
+          android:id="@+id/emailwarning"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="15dp"
+          android:layout_marginLeft="25dp"
+          android:visibility="gone"
+          android:layout_marginTop="15dp"
+          android:text="Please enter a valid email address"
+          android:textColor="@color/lightPink"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:text="Email:"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text=" "
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:inputType="textEmailAddress" />
+
+      </LinearLayout>
+
+      <TextView
+          android:id="@+id/numberwarning"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="15dp"
+          android:layout_marginLeft="25dp"
+          android:visibility="gone"
+          android:layout_marginTop="15dp"
+          android:text="Please enter a valid mobile number"
+          android:textColor="@color/lightPink"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:text="Mobile number:"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/comfortaa_light"
+
+            android:inputType="phone" />
+      </LinearLayout>
+
+
+
+
+      <Button
+          android:id="@+id/login"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Log in"
+          android:textSize="15dp"
+          android:background="@drawable/another_button_background"
+          android:layout_marginLeft="30dp"
+          android:layout_marginRight="30dp"
+          android:layout_marginTop="20dp"
+          android:fontFamily="@font/comfortaa_light"
+
+          />
+
+
+
+
+      <TextView
+          android:id="@+id/warningselection"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:layout_marginLeft="21dp"
+          android:textSize="15dp"
+          android:fontFamily="@font/comfortaa_light"
+          android:layout_marginRight="20dp"
+          android:layout_marginTop="10dp"
+          android:textColor="@color/red"
+          android:visibility="gone"
+          android:text="please make sure to choose either collection or delivery"/>
+
+<!--      <LinearLayout-->
+<!--          android:layout_width="match_parent"-->
+<!--          android:layout_height="match_parent"-->
+<!--          android:layout_gravity="center"-->
+<!--          android:gravity="center"-->
+<!--          android:orientation="horizontal">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/cash"-->
+<!--            android:layout_width="170dp"-->
+
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginLeft="35dp"-->
+
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:buttonTint="@color/colorPrimary"-->
+<!--            android:background="@drawable/another_button_background"-->
+<!--            android:fontFamily="@font/comfortaa_light"-->
+<!--            android:text="CASH"-->
+<!--            android:textSize="15dp"-->
+
+<!--            />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/card"-->
+<!--            android:background="@drawable/another_button_background"-->
+<!--            android:layout_width="170dp"-->
+
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginRight="35dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:buttonTint="@color/colorPrimary"-->
+<!--            android:fontFamily="@font/comfortaa_light"-->
+<!--            android:text="CARD"-->
+<!--            android:textSize="15dp" />-->
+
+<!--      </LinearLayout>-->
+
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/delivery"
+            android:layout_width="170dp"
+            android:background="@drawable/another_button_background"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="35dp"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="@font/comfortaa_light"
+            android:layout_marginBottom="5dp"
+            android:text="DELIVERY"
+            android:textSize="15dp"
+
+            />
+
+        <Button
+            android:id="@+id/collection"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/another_button_background"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="@font/comfortaa_light"
+            android:text="COLLECTION"
+            android:textSize="15dp" />
+
+      </LinearLayout>
+
+
+      <TextView
+          android:id="@+id/location"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textStyle="bold"
+          android:layout_gravity="center"
+          android:textSize="20dp"
+          android:layout_marginTop="15dp"
+          android:text="use current location"
+          android:textColor="@color/lightPink"/>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/add1textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:text="Address:"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/add1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=" "
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/comfortaa_light" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/citytextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:text="City:"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/comfortaa_light" />
+
+      </LinearLayout>
+      <View
+          style="@style/Divider.Horizontal.Subs"
+          android:layout_marginTop="20dp"
+          android:layout_marginBottom="25dp"
+          />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+
+          >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:fontFamily="@font/comfortaa_light"
+            android:text="Subtotal"/>
+
+        <TextView
+            android:id="@+id/subtotal_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:layout_alignParentRight="true"
+
+            android:gravity="end"
+            android:text="price"
+            android:textSize="15dp" />
+
+      </RelativeLayout>
+
+
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+
+          >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:text="Delivery charges"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_light"/>
+
+        <TextView
+            android:id="@+id/chargeS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:layout_alignParentRight="true"
+
+            android:gravity="end"
+            android:text="3 JOD"
+            android:textSize="15dp" />
+
+
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:text="Total"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_light"
+            />
+
+        <TextView
+            android:gravity="right"
+            android:id="@+id/total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:text="final price"
+            android:textSize="15dp"
+            android:fontFamily="@font/comfortaa_light"/>
+
+      </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+  </ScrollView>
+    <LinearLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+
+
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom">
+      <View
+          style="@style/Divider.Horizontal.n"
+          android:layout_marginBottom="10dp"
+          app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+
+      <LinearLayout
+
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <Button
+
+            android:id="@+id/makeorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/another_button_background"
+            android:fontFamily="@font/comfortaa_light"
+            android:gravity="center"
+            android:text="CONTINUE" />
+      </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

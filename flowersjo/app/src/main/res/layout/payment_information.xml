@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="250dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card Number"
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_light"
+            android:textSize="20dp"/>
+        <EditText
+            android:layout_width="200dp"
+            android:textSize="15dp"
+            android:hint="XXXX-XXXX-XXXX-XXXX"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="5dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/another_button_background"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSV"
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_light"
+            android:textSize="20dp"/>
+        <EditText
+            android:layout_width="60dp"
+            android:textSize="15dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="5dp"
+
+            android:hint="XXX"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/another_button_background"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expiry date"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa_light"
+            android:textSize="20dp"/>
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:hint="MM/YYYY"
+            android:background="@drawable/another_button_background"/>
+
+
+
+    </LinearLayout>
+
+    <View
+        style="@style/Divider.Horizontal.Subs"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:gravity="bottom">
+
+        <Button
+
+            android:id="@+id/makepayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/mybutton"
+            android:fontFamily="@font/comfortaa_light"
+            android:gravity="center"
+            android:text="MAKE PAYMENT" />
+    </RelativeLayout>
+
+
+</LinearLayout>
