@@ -45,11 +45,11 @@ public class splashScreen extends AppCompatActivity {
 
 //    FirebaseDatabase.getInstance().setPersistenceEnabled(true);
       FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-    readFlowersDatabase();
-    readBouquetsDatabase();
-    readBalloonsDatabase();
-    readOrdersList();
-    readOrders();
+      readFlowersDatabase();
+      readBouquetsDatabase();
+      readBalloonsDatabase();
+//    readOrdersList();
+//    readOrders();
 //        readLoveDatabase();
 //        readThankDatabase();
 //        readWeddingDatabase();
@@ -66,7 +66,7 @@ public class splashScreen extends AppCompatActivity {
     handler.postDelayed(new Runnable() {
       public void run() {
 
-        if(!listOfFlowers.isEmpty() && !listOfBouqs.isEmpty() &&!listOfBalloons.isEmpty()){
+        if(!listOfFlowers.isEmpty()){
 
           //testing
 
@@ -129,10 +129,10 @@ public class splashScreen extends AppCompatActivity {
     });
   }
 
-  private void readBalloonsDatabase() {
+  public void readBalloonsDatabase() {
     firebaseDatabase = FirebaseDatabase.getInstance();
     databaseReference = firebaseDatabase.getReference("Balloons");
-    databaseReference.addValueEventListener(new ValueEventListener() {
+    databaseReference.limitToFirst(40).addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -155,7 +155,7 @@ public class splashScreen extends AppCompatActivity {
   private void readBouquetsDatabase() {
     firebaseDatabase = FirebaseDatabase.getInstance();
     databaseReference = firebaseDatabase.getReference("Bouquets");
-    databaseReference.addValueEventListener(new ValueEventListener() {
+    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -178,7 +178,7 @@ public class splashScreen extends AppCompatActivity {
 
     firebaseDatabase = FirebaseDatabase.getInstance();
     databaseReference = firebaseDatabase.getReference("flowers");
-    databaseReference.addValueEventListener(new ValueEventListener() {
+    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
 

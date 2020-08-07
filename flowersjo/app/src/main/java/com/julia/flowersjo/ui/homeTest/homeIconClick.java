@@ -1,9 +1,11 @@
 package com.julia.flowersjo.ui.homeTest;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +22,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.julia.flowersjo.Bouquet;
+import com.julia.flowersjo.MainActivity;
 import com.julia.flowersjo.R;
 import com.julia.flowersjo.Task;
 import com.julia.flowersjo.flower;
+import com.julia.flowersjo.splashScreen;
 import com.julia.flowersjo.ui.flowerData.FlowerFragment;
 import com.julia.flowersjo.ui.flowers.flowerProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -309,35 +313,6 @@ public class homeIconClick extends Fragment {
             }
 
 //            whatsNew.clear();
-            int sizeBouq = listOfBouqs.size() - 1;
-            int sizeBalloon = listOfAllBalloons.size() - 1;
-
-
-            for (int i = 0; i <= 8; i++) {
-                if(sizeBouq >= 0) {
-                    whatsNew.add(listOfBouqs.get(sizeBouq));
-
-                    sizeBouq--;
-
-                }
-            }
-
-//            for(int i = 0; i <=4; i++){
-//                if(sizeBalloon >= 0){
-//                    whatsNew.add(listOfBalloons.get(sizeBalloon));
-//                    sizeBalloon--;
-//                }
-//
-//            }
-
-
-            Collections.shuffle(whatsNew);
-
-            for(int i = 0; i < listOfFlowers.size(); i++){
-                scrambled.add(listOfFlowers.get(i));
-
-            }
-            Collections.shuffle(listOfFlowers);
 
             runOnce = true;
 
@@ -641,52 +616,98 @@ public class homeIconClick extends Fragment {
 
 
         //adding info to whatsnew design
+        int secondsDelayed = 100;
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                if(!listOfBouqs.isEmpty()){
+
+                    //testing
+                    int sizeBouq = listOfBouqs.size() - 1;
 
 
-        byte[] decodedString = Base64.decode(whatsNew.get(0).getImage(), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        Bitmap resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+                    for (int i = 0; i <= 8; i++) {
+                        if(sizeBouq >= 0) {
+                            whatsNew.add(listOfBouqs.get(sizeBouq));
 
-        new1.setImageBitmap(resized);
-        String t = whatsNew.get(0).getPrice().replaceAll("\\D+","");
+                            sizeBouq--;
 
-        newp1.setText(t + " JOD");
+                        }
+                    }
 
-        decodedString = Base64.decode(whatsNew.get(1).getImage(), Base64.DEFAULT);
-        decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+//            for(int i = 0; i <=4; i++){
+//                if(sizeBalloon >= 0){
+//                    whatsNew.add(listOfBalloons.get(sizeBalloon));
+//                    sizeBalloon--;
+//                }
+//
+//            }
 
-        new2.setImageBitmap(resized);
-        t = whatsNew.get(1).getPrice().replaceAll("\\D+","");
 
-        newp2.setText(t + " JOD");
+                    Collections.shuffle(whatsNew);
 
-        decodedString = Base64.decode(whatsNew.get(2).getImage(), Base64.DEFAULT);
-        decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+                    for(int i = 0; i < listOfFlowers.size(); i++){
+                        scrambled.add(listOfFlowers.get(i));
 
-        new3.setImageBitmap(resized);
-        t = whatsNew.get(2).getPrice().replaceAll("\\D+","");
+                    }
+                    Collections.shuffle(listOfFlowers);
 
-        newp3.setText(t + " JOD");
+                    byte[] decodedString = Base64.decode(whatsNew.get(0).getImage(), Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    Bitmap resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
 
-        decodedString = Base64.decode(whatsNew.get(3).getImage(), Base64.DEFAULT);
-        decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+                    new1.setImageBitmap(resized);
+                    String t = whatsNew.get(0).getPrice().replaceAll("\\D+","");
 
-        new4.setImageBitmap(resized);
-        t = whatsNew.get(3).getPrice().replaceAll("\\D+","");
+                    newp1.setText(t + " JOD");
 
-        newp4.setText(t + " JOD");
+                    decodedString = Base64.decode(whatsNew.get(1).getImage(), Base64.DEFAULT);
+                    decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
 
-        decodedString = Base64.decode(whatsNew.get(4).getImage(), Base64.DEFAULT);
-        decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+                    new2.setImageBitmap(resized);
+                    t = whatsNew.get(1).getPrice().replaceAll("\\D+","");
 
-        new5.setImageBitmap(resized);
-        t = whatsNew.get(4).getPrice().replaceAll("\\D+","");
+                    newp2.setText(t + " JOD");
 
-        newp5.setText(t + " JOD");
+                    decodedString = Base64.decode(whatsNew.get(2).getImage(), Base64.DEFAULT);
+                    decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+
+                    new3.setImageBitmap(resized);
+                    t = whatsNew.get(2).getPrice().replaceAll("\\D+","");
+
+                    newp3.setText(t + " JOD");
+
+                    decodedString = Base64.decode(whatsNew.get(3).getImage(), Base64.DEFAULT);
+                    decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+
+                    new4.setImageBitmap(resized);
+                    t = whatsNew.get(3).getPrice().replaceAll("\\D+","");
+
+                    newp4.setText(t + " JOD");
+
+                    decodedString = Base64.decode(whatsNew.get(4).getImage(), Base64.DEFAULT);
+                    decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    resized = Bitmap.createScaledBitmap(decodedByte, 180, 180, true);
+
+                    new5.setImageBitmap(resized);
+                    t = whatsNew.get(4).getPrice().replaceAll("\\D+","");
+
+                    newp5.setText(t + " JOD");
+
+
+                }else {
+                    handler.postDelayed(this, secondsDelayed);
+                }
+
+            }
+        }, secondsDelayed);
+
+
 
 
 

@@ -1,9 +1,11 @@
 package com.julia.flowersjo.ui.flowerData;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +24,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.julia.flowersjo.Bouquet;
+import com.julia.flowersjo.MainActivity;
 import com.julia.flowersjo.R;
+import com.julia.flowersjo.splashScreen;
 import com.julia.flowersjo.ui.flowers.flowerProfile;
 
 import java.util.ArrayList;
@@ -67,6 +71,8 @@ public class FlowerFragment extends Fragment {
         toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         goback = (ImageView) toolbar.findViewById(R.id.goback);
         cat = toolbarTitle.getText().toString();
+
+
         if (cat.equals("Love bouquets")) {
 
             List<Bouquet> listOfLove = new ArrayList<>();
@@ -180,16 +186,34 @@ public class FlowerFragment extends Fragment {
             mRecyclerView.setAdapter(myAdapter);
 
         } else if (cat.equals("Birthday Balloons")){
+            splashScreen s = new splashScreen();
+            s.readBalloonsDatabase();
+            int secondsDelayed = 100;
+            Handler handler = new Handler();
 
-            for(int i = 0; i < listOfBalloons.size(); i++) {
-                if(listOfBalloons.get(i).getType().equals("birthday")){
-                    listOfBirthdayBalloons.add(listOfBalloons.get(i));
+            handler.postDelayed(new Runnable() {
+                public void run() {
+
+                    if(!listOfBalloons.isEmpty()){
+
+                        //testing
+
+                        for(int i = 0; i < listOfBalloons.size(); i++) {
+                            if(listOfBalloons.get(i).getType().equals("birthday")){
+                                listOfBirthdayBalloons.add(listOfBalloons.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBirthdayBalloons);
+                        myAdapter.setHasStableIds(true);
+
+                        mRecyclerView.setAdapter(myAdapter);
+                    }else {
+                        handler.postDelayed(this, secondsDelayed);
+                    }
+
                 }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBirthdayBalloons);
-            myAdapter.setHasStableIds(true);
+            }, secondsDelayed);
 
-            mRecyclerView.setAdapter(myAdapter);
 
         } else if (cat.equals("New Baby Balloons")){
 
