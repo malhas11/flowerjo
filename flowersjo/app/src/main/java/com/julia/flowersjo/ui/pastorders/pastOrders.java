@@ -105,7 +105,7 @@ public class pastOrders extends Fragment {
 
 
                     try{
-                        String databaseNameWithPath = "/data/data/" + "com.example.flowers" + "/databases/" + "orderID";
+                        String databaseNameWithPath = "/data/data/" + "com.julia.flowersjo" + "/databases/" + "orderID";
 
                         SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(databaseNameWithPath, null);
                         Cursor resultSet = db.rawQuery("Select * from orderid", null);

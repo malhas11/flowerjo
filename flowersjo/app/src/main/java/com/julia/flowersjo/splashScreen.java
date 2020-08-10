@@ -83,10 +83,10 @@ public class splashScreen extends AppCompatActivity {
     }, secondsDelayed);
   }
 
-  private void readOrders() {
+  public void readOrders() {
     firebaseDatabase = FirebaseDatabase.getInstance();
     databaseReference = firebaseDatabase.getReference("orders");
-    databaseReference.addValueEventListener(new ValueEventListener() {
+    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -106,10 +106,10 @@ public class splashScreen extends AppCompatActivity {
     });
   }
 
-  private void readOrdersList() {
+  public void readOrdersList() {
     firebaseDatabase = FirebaseDatabase.getInstance();
     databaseReference = firebaseDatabase.getReference("clientorder");
-    databaseReference.addValueEventListener(new ValueEventListener() {
+    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
 

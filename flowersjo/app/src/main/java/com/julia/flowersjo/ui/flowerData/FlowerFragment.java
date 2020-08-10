@@ -197,7 +197,7 @@ public class FlowerFragment extends Fragment {
                     if(!listOfBalloons.isEmpty()){
 
                         //testing
-
+                        listOfBirthdayBalloons.clear();
                         for(int i = 0; i < listOfBalloons.size(); i++) {
                             if(listOfBalloons.get(i).getType().equals("birthday")){
                                 listOfBirthdayBalloons.add(listOfBalloons.get(i));
@@ -216,7 +216,7 @@ public class FlowerFragment extends Fragment {
 
 
         } else if (cat.equals("New Baby Balloons")){
-
+            listOfBabyBalloons.clear();
 
             for(int i = 0; i < listOfBalloons.size(); i++) {
                 if(listOfBalloons.get(i).getType().equals("newbaby")){
@@ -230,6 +230,7 @@ public class FlowerFragment extends Fragment {
 
         } else if(cat.equals("Thank you Balloons")) {
 
+            listOfThankBalloons.clear();
             for(int i = 0; i < listOfBalloons.size(); i++) {
                 if(listOfBalloons.get(i).getType().equals("thankyou")){
                     listOfThankBalloons.add(listOfBalloons.get(i));
@@ -398,7 +399,6 @@ public class FlowerFragment extends Fragment {
                         //
                         if(cat.equals("Love bouquets")){
                             List<Bouquet> listOfLove = new ArrayList<>();
-
                             for(int i = 0; i < listOfBouqs.size(); i++) {
                                 if(listOfBouqs.get(i).getType().equals("love")){
                                     listOfLove.add(listOfBouqs.get(i));

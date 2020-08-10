@@ -121,7 +121,7 @@ public class Checkout extends Fragment {
         emailwarning = (TextView) view.findViewById(R.id.emailwarning);
         makeOrder = (Button) view.findViewById(R.id.makeorder);
         String EMAIL = email.getText().toString();
-        login.setVisibility(View.VISIBLE);
+//        login.setVisibility(View.VISIBLE);
         total_price = (TextView) view.findViewById(R.id.total_price);
         chargeS = (TextView) view.findViewById(R.id.chargeS);
 
@@ -155,7 +155,7 @@ public class Checkout extends Fragment {
                 String emailPattern2 = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
                 if(!email.getText().toString().matches(emailPattern2)){
-                    login.setVisibility(View.VISIBLE);
+//                    login.setVisibility(View.VISIBLE);
 
                 }else {
                     login.setVisibility(View.GONE);
@@ -198,7 +198,7 @@ public class Checkout extends Fragment {
 
 
         if(EMAIL.equals("") || EMAIL.equals(" ")){
-            login.setVisibility(View.VISIBLE);
+//            login.setVisibility(View.VISIBLE);
         }else {
             login.setVisibility(View.GONE);
         }
@@ -293,7 +293,25 @@ public class Checkout extends Fragment {
                 if((MainActivity.delivery == false && MainActivity.collection == false)){
                     warningselection.setVisibility(View.VISIBLE);
                 }
-                if((address.equals("")  || cit.equals("")  || EMAIL.equals("") || name.equals("") || num.equals("")) && MainActivity.delivery){
+                if((EMAIL.equals("") || name.equals("") || num.equals("")) && MainActivity.collection){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext(), R.style.MyDialogTheme);
+                    builder1.setMessage("Make sure you have filled all information.");
+
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                } if(((address.equals("")  || cit.equals("")  || EMAIL.equals("") || name.equals("") || num.equals("")) && MainActivity.delivery)){
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext(), R.style.MyDialogTheme);
                     builder1.setMessage("Make sure you have filled all information.");
@@ -317,21 +335,39 @@ public class Checkout extends Fragment {
 
 
                     if(MainActivity.collection){
+                        if(EMAIL.equals("") || name.equals("") || num.equals("") || name.equals(" ") || num.equals(" ") || EMAIL.equals(" ")){
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext(), R.style.MyDialogTheme);
+                            builder1.setMessage("Make sure you have filled all information.");
+
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
 
 
-                            client.setAddress("");
-                            client.setCity("");
-                            client.setEmail(email.getText().toString());
-                            client.setName(fname.getText().toString());
-                            client.setNumber(pnumber.getText().toString());
-                            client.setPayment("cash");
-                            client.setType("collectionAccepted");
-                            client.setPrice(totalA);
-                            client.setOrderid(ID);
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+                        }else {
+                            clientorder clientx = new clientorder();
+                            clientx.setAddress("");
+                            clientx.setCity("");
+                            clientx.setEmail(email.getText().toString());
+                            clientx.setName(fname.getText().toString());
+                            clientx.setNumber(pnumber.getText().toString());
+                            clientx.setPayment("cash");
+                            clientx.setType("collectionAccepted");
+                            clientx.setPrice(total_price.getText().toString());
+                            clientx.setOrderid(ID);
                             String databaseNameWithPath = "/data/data/" + "com.julia.flowersjo" + "/databases/" + "orderID";
-                            addInformation(client, orderList);
+                            addInformation(clientx, orderList);
 
-                            SQLiteDatabase d ;
+                            SQLiteDatabase d;
                             d = SQLiteDatabase.openOrCreateDatabase(databaseNameWithPath, null);
                             d.execSQL("CREATE TABLE IF NOT EXISTS orderID(orderid integer primary key);");
                             ContentValues insertValues = new ContentValues();
@@ -351,8 +387,8 @@ public class Checkout extends Fragment {
                             Cursor resultSet2 = dc.rawQuery("Select * from infoName", null);
 
                             ContentValues cv = new ContentValues();
-                            int x =0;
-                            while(resultSet2.moveToNext() && x < 1) {
+                            int x = 0;
+                            while (resultSet2.moveToNext() && x < 1) {
 
                                 dc.delete("infoName", "1", null);
                                 cv.put("name", fname.getText().toString());
@@ -368,6 +404,7 @@ public class Checkout extends Fragment {
 
                             Intent i = new Intent(getContext(), successActivity.class);
                             startActivity(i);
+                        }
 
                     } else if (MainActivity.delivery){
                         if(!address.equals("")  && !cit.equals("")  && !EMAIL.equals("") && !name.equals("") && !num.equals("")){
@@ -391,22 +428,22 @@ public class Checkout extends Fragment {
                                 AlertDialog alert11 = builder1.create();
                                 alert11.show();
                             }else {
+                                clientorder clientx = new clientorder();
+                                clientx.setAddress(address1.getText().toString());
+                                clientx.setCity(city.getText().toString());
+                                clientx.setEmail(email.getText().toString());
+                                clientx.setName(fname.getText().toString());
+                                clientx.setNumber(pnumber.getText().toString());
+                                clientx.setPayment("cash");
 
-                                client.setAddress(address1.getText().toString());
-                                client.setCity(city.getText().toString());
-                                client.setEmail(email.getText().toString());
-                                client.setName(fname.getText().toString());
-                                client.setNumber(pnumber.getText().toString());
-                                client.setPayment("cash");
+                                clientx.setType("delivery");
 
-                                client.setType("delivery");
+                                clientx.setPrice(totalA);
+                                clientx.setOrderid(ID);
 
-                                client.setPrice(totalA);
-                                client.setOrderid(ID);
-
-                                addInformation(client, orderList);
+                                addInformation(clientx, orderList);
                                 sendEmail();
-                                String databaseNameWithPath = "/data/data/" + "com.example.flowers" + "/databases/" + "orderID";
+                                String databaseNameWithPath = "/data/data/" + "com.julia.flowersjo" + "/databases/" + "orderID";
 
                                 SQLiteDatabase d ;
                                 d = SQLiteDatabase.openOrCreateDatabase(databaseNameWithPath, null);
@@ -438,7 +475,7 @@ public class Checkout extends Fragment {
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                login.setVisibility(View.VISIBLE);
+//                login.setVisibility(View.VISIBLE);
 
             }
 
@@ -453,7 +490,7 @@ public class Checkout extends Fragment {
 
                 if(!emailV.matches(emailPattern) || s.length() == 0){
                     emailwarning.setVisibility(View.VISIBLE);
-                    login.setVisibility(View.VISIBLE);
+//                    login.setVisibility(View.VISIBLE);
                 }else {
                     emailwarning.setVisibility(View.GONE);
                     login.setVisibility(View.GONE);
@@ -482,6 +519,17 @@ public class Checkout extends Fragment {
                 address1.setVisibility(View.GONE);
                 city.setVisibility(View.GONE);
                 location.setVisibility(View.GONE);
+                chargeS.setText("0 JOD");
+                int subtotal = 0;
+                int total = 0;
+                for(int i = 0; i < listofcart.size(); i++){
+                    String x = listofcart.get(i).getPrice().replaceAll("\\D+","");
+                    subtotal = Integer.parseInt(x) + subtotal;
+                    total = subtotal;
+
+                }
+                total_price.setText(Integer.toString(total) + " JOD");
+                subtotal_price.setText(Integer.toString(subtotal) + " JOD");
             }
         });
 
@@ -510,6 +558,19 @@ public class Checkout extends Fragment {
                 address1.setVisibility(View.VISIBLE);
                 city.setVisibility(View.VISIBLE);
                 location.setVisibility(View.VISIBLE);
+                chargeS.setText("3 JOD");
+
+                int subtotal = 0;
+                int total = 0;
+                for(int i = 0; i < listofcart.size(); i++){
+                    String x = listofcart.get(i).getPrice().replaceAll("\\D+","");
+                    subtotal = Integer.parseInt(x) + subtotal;
+                    total = subtotal;
+
+                }
+                total = total + 3;
+                total_price.setText(Integer.toString(total) + " JOD");
+                subtotal_price.setText(Integer.toString(subtotal) + " JOD");
 
             }
         });

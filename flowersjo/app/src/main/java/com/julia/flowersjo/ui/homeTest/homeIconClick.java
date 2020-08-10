@@ -1,5 +1,6 @@
 package com.julia.flowersjo.ui.homeTest;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -223,26 +224,26 @@ public class homeIconClick extends Fragment {
 //                "Loading. Please wait...", true);
         if(clicked == false){
             clicked = true;
-//            ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.MyDialogTheme);
-//            progressDialog.setMessage("Loading...");
-//            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//            progressDialog.setIndeterminate(true);
-//            progressDialog.show();
-//            progressDialog.setCancelable(false);
-//            Handler handler = new Handler();
+            ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.MyDialogTheme);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+            Handler handler = new Handler();
             int delay = 1000;
-//
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if(!flowerp1.getText().toString().equals(" ")){
-//                        progressDialog.dismiss();
-//
-//                    }else
-//                        handler.postDelayed(this, delay);
-//
-//                }
-//            }, delay);
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(!flowerp1.getText().toString().equals(" ") && !(whatsNew.size() < 1)){
+                        progressDialog.dismiss();
+
+                    }else
+                        handler.postDelayed(this, delay);
+
+                }
+            }, delay);
 
 
         }
@@ -646,13 +647,11 @@ public class homeIconClick extends Fragment {
 //            }
 
 
-                    Collections.shuffle(whatsNew);
 
                     for(int i = 0; i < listOfFlowers.size(); i++){
                         scrambled.add(listOfFlowers.get(i));
 
                     }
-                    Collections.shuffle(listOfFlowers);
 
                     byte[] decodedString = Base64.decode(whatsNew.get(0).getImage(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
