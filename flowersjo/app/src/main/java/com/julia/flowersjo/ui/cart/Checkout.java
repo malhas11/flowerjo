@@ -751,6 +751,7 @@ public class Checkout extends Fragment {
             }
         } else {
             requestPermissions();
+            getLastLocation();
         }
     }
 

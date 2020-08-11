@@ -8,8 +8,8 @@ android {
         applicationId "com.julia.flowersjo"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.2.20"
+        versionCode 8
+        versionName "1.2.40"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -68,6 +68,7 @@ dependencies {
     //firebase authentication
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.android.billingclient:billing:2.1.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
 
     //paypal
     implementation 'com.braintreepayments.api:braintree:2.+'

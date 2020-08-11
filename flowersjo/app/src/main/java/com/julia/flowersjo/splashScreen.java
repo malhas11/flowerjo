@@ -47,7 +47,7 @@ public class splashScreen extends AppCompatActivity {
       FirebaseDatabase.getInstance().setPersistenceEnabled(true);
       readFlowersDatabase();
       readBouquetsDatabase();
-      readBalloonsDatabase();
+//      readBalloonsDatabase();
 //    readOrdersList();
 //    readOrders();
 //        readLoveDatabase();
@@ -129,10 +129,32 @@ public class splashScreen extends AppCompatActivity {
     });
   }
 
-  public void readBalloonsDatabase() {
+//  public void readBalloonsDatabase() {
+//    firebaseDatabase = FirebaseDatabase.getInstance();
+//    databaseReference = firebaseDatabase.getReference("Balloons");
+//    databaseReference.limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//        DatabaseHelper d = new DatabaseHelper();
+//        listOfBalloons.clear();
+//        listOfBalloons = d.DatabaseHelperReadBouquets(dataSnapshot);
+//
+//
+//
+//      }
+//
+//      @Override
+//      public void onCancelled(DatabaseError error) {
+//        // Failed to read value
+//        Log.w(TAG, "Failed to read value.", error.toException());
+//      }
+//    });
+//  }
+  public void readAllBalloonsDatabase() {
     firebaseDatabase = FirebaseDatabase.getInstance();
     databaseReference = firebaseDatabase.getReference("Balloons");
-    databaseReference.limitToFirst(40).addListenerForSingleValueEvent(new ValueEventListener() {
+    databaseReference.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -155,7 +177,7 @@ public class splashScreen extends AppCompatActivity {
   private void readBouquetsDatabase() {
     firebaseDatabase = FirebaseDatabase.getInstance();
     databaseReference = firebaseDatabase.getReference("Bouquets");
-    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    databaseReference.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
 

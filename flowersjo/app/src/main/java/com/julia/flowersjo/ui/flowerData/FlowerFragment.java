@@ -1,5 +1,6 @@
 package com.julia.flowersjo.ui.flowerData;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,6 +40,7 @@ import static com.julia.flowersjo.MainActivity.listOfLoveBalloons;
 import static com.julia.flowersjo.MainActivity.listOfThankBalloons;
 import static com.julia.flowersjo.MainActivity.profileOne;
 import static com.julia.flowersjo.MainActivity.rolled;
+import static com.julia.flowersjo.MainActivity.whatsNew;
 import static com.julia.flowersjo.splashScreen.listOfBalloons;
 import static com.julia.flowersjo.splashScreen.listOfBouqs;
 
@@ -72,253 +74,276 @@ public class FlowerFragment extends Fragment {
         goback = (ImageView) toolbar.findViewById(R.id.goback);
         cat = toolbarTitle.getText().toString();
 
+        splashScreen s = new splashScreen();
+        s.readAllBalloonsDatabase();
+        ProgressDialog progressDialog = new ProgressDialog(getActivity(), R.style.MyDialogTheme);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        Handler handler = new Handler();
+        int delay = 1000;
 
-        if (cat.equals("Love bouquets")) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(listOfBalloons.size()> 11){
+                    progressDialog.dismiss();
 
-            List<Bouquet> listOfLove = new ArrayList<>();
-            for(int i = 0; i < listOfBouqs.size(); i++) {
-                if(listOfBouqs.get(i).getType().equals("love")){
-                    listOfLove.add(listOfBouqs.get(i));
-                    Log.d("description", listOfLove.get(i).getPrice());
-                }
-            }
+                    if (cat.equals("Love bouquets")) {
 
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfLove);
-            myAdapter.setHasStableIds(true);
-            mRecyclerView.setAdapter(myAdapter);
-
-        } else if (cat.equals("Thank you bouquets")) {
-            List<Bouquet> listOfThank = new ArrayList<>();
-            for(int i = 0; i < listOfBouqs.size(); i++) {
-                if(listOfBouqs.get(i).getType().equals("thankyou")){
-                    listOfThank.add(listOfBouqs.get(i));
-                }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfThank);
-            myAdapter.setHasStableIds(true);
-
-            mRecyclerView.setAdapter(myAdapter);
-
-        } else if (cat.equals("New Baby bouquets")) {
-            List<Bouquet> listOfBaby = new ArrayList<>();
-            for(int i = 0; i < listOfBouqs.size(); i++) {
-                if(listOfBouqs.get(i).getType().equals("newbaby")){
-                    listOfBaby.add(listOfBouqs.get(i));
-                }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBaby);
-            myAdapter.setHasStableIds(true);
-            mRecyclerView.setAdapter(myAdapter);
-
-
-
-        } else if (cat.equals("Get well bouquets")) {
-            List<Bouquet> listOfWedding = new ArrayList<>();
-            for(int i = 0; i < listOfBouqs.size(); i++) {
-                if(listOfBouqs.get(i).getType().equals("wedding")){
-                    listOfWedding.add(listOfBouqs.get(i));
-                }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfWedding);
-            myAdapter.setHasStableIds(true);
-            mRecyclerView.setAdapter(myAdapter);
-
-        } else if (cat.equals("Birthday bouquets")) {
-            List<Bouquet> listOfBirthday = new ArrayList<>();
-            for(int i = 0; i < listOfBouqs.size(); i++) {
-                if(listOfBouqs.get(i).getType().equals("birthday")){
-                    listOfBirthday.add(listOfBouqs.get(i));
-                }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBirthday);
-            myAdapter.setHasStableIds(true);
-            mRecyclerView.setAdapter(myAdapter);
-
-
-
-
-        } else if (cat.equals("Graduation bouquets")) {
-            List<Bouquet> listOfGraduation = new ArrayList<>();
-            for(int i = 0; i < listOfBouqs.size(); i++) {
-                if(listOfBouqs.get(i).getType().equals("graduation")){
-                    listOfGraduation.add(listOfBouqs.get(i));
-                }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfGraduation);
-            myAdapter.setHasStableIds(true);
-            mRecyclerView.setAdapter(myAdapter);
-
-
-
-
-        }else if(cat.equals("All Bouquets")){
-            List<Bouquet> listOfAll = new ArrayList<>();
-            for(int i = 0; i < listOfBouqs.size();i++){
-                listOfAll.add(listOfBouqs.get(i));
-            }
-            for(int i = 0; i < listOfAll.size(); i++){
-                String desc = listOfAll.get(i).getDescription();
-                String price = listOfAll.get(i).getPrice();
-                int rep = 0;
-                for(int j = 0; j < listOfAll.size(); j++){
-                    String desc2 = listOfAll.get(j).getDescription();
-                    String price2 = listOfAll.get(j).getPrice();
-                    if(desc.equals(desc2) && price.equals(price2)){
-                        rep++;
-                    }
-                }
-                if(rep > 1){
-                    for(int k = 0; k < listOfAll.size(); k++){
-                        if(desc.equals(listOfAll.get(k).getDescription()) && price.equals(listOfAll.get(k).getPrice())){
-                            listOfAll.remove(k);
-                            rep--;
-                            if(rep == 1){
-                                break;
-                            }
-
-                        }
-                    }
-                }
-            }
-            MyAdapter myAdapter = new MyAdapter(getContext(), listOfAll);
-
-            myAdapter.setHasStableIds(true);
-            mRecyclerView.setAdapter(myAdapter);
-
-        } else if (cat.equals("Birthday Balloons")){
-            splashScreen s = new splashScreen();
-            s.readBalloonsDatabase();
-            int secondsDelayed = 100;
-            Handler handler = new Handler();
-
-            handler.postDelayed(new Runnable() {
-                public void run() {
-
-                    if(!listOfBalloons.isEmpty()){
-
-                        //testing
-                        listOfBirthdayBalloons.clear();
-                        for(int i = 0; i < listOfBalloons.size(); i++) {
-                            if(listOfBalloons.get(i).getType().equals("birthday")){
-                                listOfBirthdayBalloons.add(listOfBalloons.get(i));
+                        List<Bouquet> listOfLove = new ArrayList<>();
+                        for(int i = 0; i < listOfBouqs.size(); i++) {
+                            if(listOfBouqs.get(i).getType().equals("love")){
+                                listOfLove.add(listOfBouqs.get(i));
+                                Log.d("description", listOfLove.get(i).getPrice());
                             }
                         }
-                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBirthdayBalloons);
+
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfLove);
+                        myAdapter.setHasStableIds(true);
+                        mRecyclerView.setAdapter(myAdapter);
+
+                    } else if (cat.equals("Thank you bouquets")) {
+                        List<Bouquet> listOfThank = new ArrayList<>();
+                        for(int i = 0; i < listOfBouqs.size(); i++) {
+                            if(listOfBouqs.get(i).getType().equals("thankyou")){
+                                listOfThank.add(listOfBouqs.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfThank);
                         myAdapter.setHasStableIds(true);
 
                         mRecyclerView.setAdapter(myAdapter);
-                    }else {
-                        handler.postDelayed(this, secondsDelayed);
-                    }
 
-                }
-            }, secondsDelayed);
+                    } else if (cat.equals("New Baby bouquets")) {
+                        List<Bouquet> listOfBaby = new ArrayList<>();
+                        for(int i = 0; i < listOfBouqs.size(); i++) {
+                            if(listOfBouqs.get(i).getType().equals("newbaby")){
+                                listOfBaby.add(listOfBouqs.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBaby);
+                        myAdapter.setHasStableIds(true);
+                        mRecyclerView.setAdapter(myAdapter);
 
 
-        } else if (cat.equals("New Baby Balloons")){
-            listOfBabyBalloons.clear();
 
-            for(int i = 0; i < listOfBalloons.size(); i++) {
-                if(listOfBalloons.get(i).getType().equals("newbaby")){
-                    listOfBabyBalloons.add(listOfBalloons.get(i));
-                }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBabyBalloons);
-            myAdapter.setHasStableIds(true);
+                    } else if (cat.equals("Get well bouquets")) {
+                        List<Bouquet> listOfWedding = new ArrayList<>();
+                        for(int i = 0; i < listOfBouqs.size(); i++) {
+                            if(listOfBouqs.get(i).getType().equals("wedding")){
+                                listOfWedding.add(listOfBouqs.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfWedding);
+                        myAdapter.setHasStableIds(true);
+                        mRecyclerView.setAdapter(myAdapter);
 
-            mRecyclerView.setAdapter(myAdapter);
+                    } else if (cat.equals("Birthday bouquets")) {
+                        List<Bouquet> listOfBirthday = new ArrayList<>();
+                        for(int i = 0; i < listOfBouqs.size(); i++) {
+                            if(listOfBouqs.get(i).getType().equals("birthday")){
+                                listOfBirthday.add(listOfBouqs.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBirthday);
+                        myAdapter.setHasStableIds(true);
+                        mRecyclerView.setAdapter(myAdapter);
 
-        } else if(cat.equals("Thank you Balloons")) {
 
-            listOfThankBalloons.clear();
-            for(int i = 0; i < listOfBalloons.size(); i++) {
-                if(listOfBalloons.get(i).getType().equals("thankyou")){
-                    listOfThankBalloons.add(listOfBalloons.get(i));
-                }
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfThankBalloons);
-            myAdapter.setHasStableIds(true);
 
-            mRecyclerView.setAdapter(myAdapter);
 
-        }else if(cat.equals("Love Balloons")) {
+                    } else if (cat.equals("Graduation bouquets")) {
+                        List<Bouquet> listOfGraduation = new ArrayList<>();
+                        for(int i = 0; i < listOfBouqs.size(); i++) {
+                            if(listOfBouqs.get(i).getType().equals("graduation")){
+                                listOfGraduation.add(listOfBouqs.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfGraduation);
+                        myAdapter.setHasStableIds(true);
+                        mRecyclerView.setAdapter(myAdapter);
 
-            listOfLoveBalloons.clear();
-            for(int i = 0; i < listOfBalloons.size(); i++) {
-                Log.d("tag", "balloons: type : " + listOfBalloons.get(i).getType());
 
-                if(listOfBalloons.get(i).getType().equals("love")){
-                    listOfLoveBalloons.add(listOfBalloons.get(i));
 
-                }
 
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfLoveBalloons);
-            myAdapter.setHasStableIds(true);
+                    }else if(cat.equals("All Bouquets")){
+                        List<Bouquet> listOfAll = new ArrayList<>();
+                        for(int i = 0; i < listOfBouqs.size();i++){
+                            listOfAll.add(listOfBouqs.get(i));
+                        }
+                        for(int i = 0; i < listOfAll.size(); i++){
+                            String desc = listOfAll.get(i).getDescription();
+                            String price = listOfAll.get(i).getPrice();
+                            int rep = 0;
+                            for(int j = 0; j < listOfAll.size(); j++){
+                                String desc2 = listOfAll.get(j).getDescription();
+                                String price2 = listOfAll.get(j).getPrice();
+                                if(desc.equals(desc2) && price.equals(price2)){
+                                    rep++;
+                                }
+                            }
+                            if(rep > 1){
+                                for(int k = 0; k < listOfAll.size(); k++){
+                                    if(desc.equals(listOfAll.get(k).getDescription()) && price.equals(listOfAll.get(k).getPrice())){
+                                        listOfAll.remove(k);
+                                        rep--;
+                                        if(rep == 1){
+                                            break;
+                                        }
 
-            mRecyclerView.setAdapter(myAdapter);
+                                    }
+                                }
+                            }
+                        }
+                        MyAdapter myAdapter = new MyAdapter(getContext(), listOfAll);
 
-        }else if(cat.equals("Graduation balloons")) {
+                        myAdapter.setHasStableIds(true);
+                        mRecyclerView.setAdapter(myAdapter);
 
-            listOfGradBalloons.clear();
-            for(int i = 0; i < listOfBalloons.size(); i++) {
-                Log.d("tag", "balloons: type : " + listOfBalloons.get(i).getType());
+                    } else if (cat.equals("Birthday Balloons")){
+                        splashScreen s = new splashScreen();
+                        s.readAllBalloonsDatabase();
+                        int secondsDelayed = 100;
+                        Handler handler = new Handler();
 
-                if(listOfBalloons.get(i).getType().equals("graduation")){
-                    listOfGradBalloons.add(listOfBalloons.get(i));
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
 
-                }
+                                if(!listOfBalloons.isEmpty()){
 
-            }
-            FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfGradBalloons);
-            myAdapter.setHasStableIds(true);
+                                    //testing
+                                    listOfBirthdayBalloons.clear();
+                                    for(int i = 0; i < listOfBalloons.size(); i++) {
+                                        if(listOfBalloons.get(i).getType().equals("birthday")){
+                                            listOfBirthdayBalloons.add(listOfBalloons.get(i));
+                                        }
+                                    }
+                                    FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBirthdayBalloons);
+                                    myAdapter.setHasStableIds(true);
 
-            mRecyclerView.setAdapter(myAdapter);
+                                    mRecyclerView.setAdapter(myAdapter);
+                                }else {
+                                    handler.postDelayed(this, secondsDelayed);
+                                }
 
-        } else if(cat.equals("All Balloons")){
-            List<Bouquet> listOfAll = new ArrayList<>();
-            for(int i = 0; i <listOfBalloons.size();i++){
-                if(listOfBalloons.get(i).getType().equals("String")){
-                    listOfBalloons.remove(i);
-                }
-            }
-            for(int i = 0; i < listOfBalloons.size();i++){
-                listOfAll.add(listOfBalloons.get(i));
-                Log.d("list of balloons", "type: " + listOfBalloons.get(i).getType());
-            }
-            for(int i = 0; i < listOfAll.size(); i++){
-                String desc = listOfAll.get(i).getDescription();
-                String price2 = listOfAll.get(i).getPrice();
-                int rep = 0;
-                for(int j = 0; j < listOfAll.size(); j++){
-                    String desc2 = listOfAll.get(j).getDescription();
-                    String price = listOfAll.get(j).getPrice();
+                            }
+                        }, secondsDelayed);
 
-                    if(desc.equals(desc2) && price.equals(price2) ){
-                        rep++;
-                    }
-                }
-                if(rep > 1){
-                    for(int k = 0; k < listOfAll.size(); k++){
-                        if(desc.equals(listOfAll.get(k).getDescription()) && price2.equals(listOfAll.get(k).getPrice())){
-                            listOfAll.remove(k);
-                            rep--;
-                            if(rep == 1){
-                                break;
+
+                    } else if (cat.equals("New Baby Balloons")){
+                        listOfBabyBalloons.clear();
+
+                        for(int i = 0; i < listOfBalloons.size(); i++) {
+                            if(listOfBalloons.get(i).getType().equals("newbaby")){
+                                listOfBabyBalloons.add(listOfBalloons.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfBabyBalloons);
+                        myAdapter.setHasStableIds(true);
+
+                        mRecyclerView.setAdapter(myAdapter);
+
+                    } else if(cat.equals("Thank you Balloons")) {
+
+                        listOfThankBalloons.clear();
+                        for(int i = 0; i < listOfBalloons.size(); i++) {
+                            if(listOfBalloons.get(i).getType().equals("thankyou")){
+                                listOfThankBalloons.add(listOfBalloons.get(i));
+                            }
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfThankBalloons);
+                        myAdapter.setHasStableIds(true);
+
+                        mRecyclerView.setAdapter(myAdapter);
+
+                    }else if(cat.equals("Love Balloons")) {
+
+                        listOfLoveBalloons.clear();
+                        for(int i = 0; i < listOfBalloons.size(); i++) {
+                            Log.d("tag", "balloons: type : " + listOfBalloons.get(i).getType());
+
+                            if(listOfBalloons.get(i).getType().equals("love")){
+                                listOfLoveBalloons.add(listOfBalloons.get(i));
+
                             }
 
                         }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfLoveBalloons);
+                        myAdapter.setHasStableIds(true);
+
+                        mRecyclerView.setAdapter(myAdapter);
+
+                    }else if(cat.equals("Graduation balloons")) {
+
+                        listOfGradBalloons.clear();
+                        for(int i = 0; i < listOfBalloons.size(); i++) {
+                            Log.d("tag", "balloons: type : " + listOfBalloons.get(i).getType());
+
+                            if(listOfBalloons.get(i).getType().equals("graduation")){
+                                listOfGradBalloons.add(listOfBalloons.get(i));
+
+                            }
+
+                        }
+                        FlowerFragment.MyAdapter myAdapter = new FlowerFragment.MyAdapter(getContext(), listOfGradBalloons);
+                        myAdapter.setHasStableIds(true);
+
+                        mRecyclerView.setAdapter(myAdapter);
+
+                    } else if(cat.equals("All Balloons")){
+                        List<Bouquet> listOfAll = new ArrayList<>();
+                        for(int i = 0; i <listOfBalloons.size();i++){
+                            if(listOfBalloons.get(i).getType().equals("String")){
+                                listOfBalloons.remove(i);
+                            }
+                        }
+                        for(int i = 0; i < listOfBalloons.size();i++){
+                            listOfAll.add(listOfBalloons.get(i));
+                            Log.d("list of balloons", "type: " + listOfBalloons.get(i).getType());
+                        }
+                        for(int i = 0; i < listOfAll.size(); i++){
+                            String desc = listOfAll.get(i).getDescription();
+                            String price2 = listOfAll.get(i).getPrice();
+                            int rep = 0;
+                            for(int j = 0; j < listOfAll.size(); j++){
+                                String desc2 = listOfAll.get(j).getDescription();
+                                String price = listOfAll.get(j).getPrice();
+
+                                if(desc.equals(desc2) && price.equals(price2) ){
+                                    rep++;
+                                }
+                            }
+                            if(rep > 1){
+                                for(int k = 0; k < listOfAll.size(); k++){
+                                    if(desc.equals(listOfAll.get(k).getDescription()) && price2.equals(listOfAll.get(k).getPrice())){
+                                        listOfAll.remove(k);
+                                        rep--;
+                                        if(rep == 1){
+                                            break;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+
+                        MyAdapter myAdapter = new MyAdapter(getContext(), listOfAll);
+                        myAdapter.setHasStableIds(true);
+                        mRecyclerView.setAdapter(myAdapter);
+
+
                     }
-                }
+                    mRecyclerView.scrollToPosition(rolled);
+                }else
+                    handler.postDelayed(this, delay);
+
             }
-
-            MyAdapter myAdapter = new MyAdapter(getContext(), listOfAll);
-            myAdapter.setHasStableIds(true);
-            mRecyclerView.setAdapter(myAdapter);
+        }, delay);
 
 
-        }
-        mRecyclerView.scrollToPosition(rolled);
 
         return view;
     }
